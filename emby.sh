@@ -33,7 +33,7 @@ function tmdbproxy(){
     clear 
     movieDbPlugin=/volume1/@appdata/EmbyServer/plugins/MovieDbProxy.dll
     rm -f ${movieDbPlugin}
-    curl -s -k -o ${movieDbPlugin} https://2ha.me:8887/emby/MovieDbProxy.dll
+    curl -s -k -o ${movieDbPlugin} https://crackemby.2ha.me/dll/MovieDbProxy.dll
     chown emby:emby ${movieDbPlugin}
     chmod 644 ${movieDbPlugin}
     echo "请重启emby检查插件列表是否包含MovieDbProxy，并设置MovieDbProxy为首选刮削器"  
@@ -49,10 +49,10 @@ function happy(){
     mm=/var/packages/EmbyServer/target/system/MediaBrowser.Model.dll 
     ep=/var/packages/EmbyServer/target/system/dashboard-ui/embypremiere/embypremiere.js
     rm -f ${esi} ${ew} ${mm} ${ep}
-    curl -s -k -o ${esi} https://2ha.me:8887/emby/${version}/Emby.Server.Implementations.dll
-    curl -s -k -o ${ew} https://2ha.me:8887/emby/${version}/Emby.Web.dll
-    curl -s -k -o ${mm} https://2ha.me:8887/emby/${version}/MediaBrowser.Model.dll
-    curl -s -k -o ${ep} https://2ha.me:8887/emby/${version}/embypremiere.js
+    curl -s -k -o ${esi} https://crackemby.2ha.me/dll/${version}/Emby.Server.Implementations.dll
+    curl -s -k -o ${ew} https://crackemby.2ha.me/dll/${version}/Emby.Web.dll
+    curl -s -k -o ${mm} https://crackemby.2ha.me/dll/${version}/MediaBrowser.Model.dll
+    curl -s -k -o ${ep} https://crackemby.2ha.me/dll/${version}/embypremiere.js
     chown emby:emby ${esi} ${ew} ${mm} ${ep}
     chmod 644 ${esi} ${ew} ${mm} ${ep}
     echo "重启Emby后在激活页面输入任意激活码即可开心"
