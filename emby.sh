@@ -11,6 +11,7 @@ function embyVersionMenu(){
     green " 支持以下版本解锁开心"
     green " 1. Emby 4.7.13"
     green " 2. Emby 4.8.39"
+    green " 3. Emby 4.7.14"
     echo
     read -p "请选择: " userin
     case "${userin}" in
@@ -21,6 +22,10 @@ function embyVersionMenu(){
         2 )
             echo "开始解锁4.8.39版本"
             happy "4.8.39"
+        ;;
+        3 )
+            echo "开始解锁4.7.14版本"
+            happy "4.7.14"
         ;;
         * )
             red " 请输入数字 1 或 2"
@@ -60,7 +65,7 @@ function happy(){
 function start(){
     echo
     green " ====================================================================================================="
-    green " Emby开心脚本 | 2023-7-7 ｜ 系统支持: DSM7 / DSM7.2 / DSM6 | 支持 Emby 4.8.39 / 4.7.13 QQ群: 675406101 "
+    green " Emby开心脚本 | 2023-7-7 ｜ 系统支持: DSM7 / DSM7.2 / DSM6 | 支持 Emby 4.8.39 / 4.7.1x QQ群: 675406101 "
     green " ====================================================================================================="
     green " 1. 开心"
     green " 2. 安装TMDB代理刮削插件"  
