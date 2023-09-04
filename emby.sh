@@ -1,4 +1,9 @@
 #!/bin/bash
+domain="https://crackemby.2ha.me"
+folder_path="/dll"
+server_path=$domain$folder_path
+emby_system_root="/var/packages/EmbyServer/target/system"
+
 function green(){
     echo -e "\033[32m\033[01m$1\033[0m"
 }
@@ -31,9 +36,23 @@ function embyVersionMenu(){
 
 function tmdbproxy(){
     clear 
-    movieDbPlugin=/volume1/@appdata/EmbyServer/plugins/MovieDbProxy.dll
+    plugin_path="/volume1/@appdata/EmbyServer/plugins"
+    if [ -d "$plugin_path" ]; then
+        echo "Emby 插件目录: $plugin_path"
+    else
+        # if plugin path does not in default path, find that in volume[1~16].
+        for ((i=1;i<=16;i++))
+            do
+                appdata="/volume$i/@appdata/EmbyServer/plugins"
+                if [ -d "$plugin_path" ]; then
+                    echo "Emby 插件目录: $plugin_path"
+                    break
+                fi
+        done
+    fi
+    movieDbPlugin="$plugin_path/MovieDbProxy.dll"
     rm -f ${movieDbPlugin}
-    curl -s -k -o ${movieDbPlugin} https://crackemby.2ha.me/dll/MovieDbProxy.dll
+    curl -s -k -o ${movieDbPlugin} $domain/dll/MovieDbProxy.dll
     chown emby:emby ${movieDbPlugin}
     chmod 644 ${movieDbPlugin}
     echo "请重启emby检查插件列表是否包含MovieDbProxy，并设置MovieDbProxy为首选刮削器"  
@@ -44,15 +63,15 @@ function happy(){
 
     version=$1
 
-    esi=/var/packages/EmbyServer/target/system/Emby.Server.Implementations.dll
-    ew=/var/packages/EmbyServer/target/system/Emby.Web.dll 
-    mm=/var/packages/EmbyServer/target/system/MediaBrowser.Model.dll 
-    ep=/var/packages/EmbyServer/target/system/dashboard-ui/embypremiere/embypremiere.js
+    esi=$emby_system_root/Emby.Server.Implementations.dll
+    ew=$emby_system_root/Emby.Web.dll 
+    mm=$emby_system_root/MediaBrowser.Model.dll 
+    ep=$emby_system_root/dashboard-ui/embypremiere/embypremiere.js
     rm -f ${esi} ${ew} ${mm} ${ep}
-    curl -s -k -o ${esi} https://crackemby.2ha.me/dll/${version}/Emby.Server.Implementations.dll
-    curl -s -k -o ${ew} https://crackemby.2ha.me/dll/${version}/Emby.Web.dll
-    curl -s -k -o ${mm} https://crackemby.2ha.me/dll/${version}/MediaBrowser.Model.dll
-    curl -s -k -o ${ep} https://crackemby.2ha.me/dll/${version}/embypremiere.js
+    curl -s -k -o ${esi} $server_path/${version}/Emby.Server.Implementations.dll
+    curl -s -k -o ${ew} $server_path/${version}/Emby.Web.dll
+    curl -s -k -o ${mm} $server_path/${version}/MediaBrowser.Model.dll
+    curl -s -k -o ${ep} $server_path/${version}/embypremiere.js
     chown emby:emby ${esi} ${ew} ${mm} ${ep}
     chmod 644 ${esi} ${ew} ${mm} ${ep}
     echo "重启Emby后在激活页面输入任意激活码即可开心"
